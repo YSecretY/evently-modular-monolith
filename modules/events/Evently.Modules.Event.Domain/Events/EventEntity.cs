@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Evently.Modules.Event.Domain.Abstractions;
+using Evently.Modules.Event.Domain.Events.DomainEvents;
 using Evently.Modules.Event.Domain.TicketTypes;
 
 namespace Evently.Modules.Event.Domain.Events;
@@ -36,11 +37,11 @@ public sealed class EventEntity : Entity
 
     [MaxLength(1024)] public string Location { get; init; }
 
-    public DateTime StartsAtUtc { get; init; }
+    public DateTime StartsAtUtc { get; private set; }
 
-    public DateTime? EndsAtUtc { get; init; }
+    public DateTime? EndsAtUtc { get; private set; }
 
-    public EventStatus Status { get; init; }
+    public EventStatus Status { get; private set; }
 
     public List<TicketType> TicketTypes { get; init; } = null!;
 
@@ -69,5 +70,39 @@ public sealed class EventEntity : Entity
         eventEntity.Raise(new EventCreatedDomainEvent(eventEntity.Id));
 
         return eventEntity;
+    }
+
+    public void Publish()
+    {
+        if (Status is not EventStatus.Draft)
+            throw new ValidationException("Event is not draft.");
+
+        Status = EventStatus.Published;
+
+        Raise(new EventPublishedDomainEvent(Id));
+    }
+
+    public void Reschedule(DateTime startsAtUtc, DateTime? endsAtUtc)
+    {
+        if (startsAtUtc == StartsAtUtc && EndsAtUtc == endsAtUtc)
+            return;
+
+        StartsAtUtc = startsAtUtc;
+        EndsAtUtc = endsAtUtc;
+
+        Raise(new EventRescheduledDomainEvent(eventId: Id, startsAtUtc: StartsAtUtc, endsAtUtc: EndsAtUtc));
+    }
+
+    public void Cancel(DateTime utcNow)
+    {
+        if (Status is EventStatus.Canceled)
+            throw new ValidationException("Event is already canceled.");
+
+        if (StartsAtUtc < utcNow)
+            throw new ValidationException("Event is already started.");
+
+        Status = EventStatus.Canceled;
+
+        Raise(new EventCanceledDomainEvent(Id));
     }
 }

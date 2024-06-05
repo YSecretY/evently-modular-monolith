@@ -8,5 +8,6 @@ public sealed record EventResponse(
     Guid CategoryId,
     DateTime StartsAtUtc,
     DateTime? EndsAtUtc,
+    string Status,
     List<TicketTypeResponse> TicketTypes
 );

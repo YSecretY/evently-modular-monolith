@@ -1,8 +1,14 @@
 using System.Reflection;
+using Evently.Modules.Event.Application.Abstraction;
+using Evently.Modules.Event.Application.Events.Cancel;
 using Evently.Modules.Event.Application.Events.Create;
 using Evently.Modules.Event.Application.Events.Get;
+using Evently.Modules.Event.Application.Events.GetList;
+using Evently.Modules.Event.Application.Events.Publish_;
+using Evently.Modules.Event.Application.Events.Reschedule;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Infrastructure.Database;
+using Evently.Modules.Event.Infrastructure.Services.Time;
 using Evently.Modules.Event.Presentation.Events.Controllers;
 using FluentValidation;
 using Mapster;
@@ -56,9 +62,15 @@ public static class EventsModule
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
+        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+
         services.AddTransient<IRequestHandler<CreateEventCommand, Guid>, CreateEventCommandHandler>();
         services.AddTransient<IRequestHandler<GetEventQuery, EventEntity>, GetEventQueryHandler>();
-
+        services.AddTransient<IRequestHandler<GetEventsListQuery, GetEventsListQueryResponse>, GetEventsListQueryHandler>();
+        services.AddTransient<IRequestHandler<CancelEventCommand>, CancelEventCommandHandler>();
+        services.AddTransient<IRequestHandler<PublishEventCommand>, PublishEventCommandHandler>();
+        services.AddTransient<IRequestHandler<RescheduleEventCommand>, RescheduleEventCommandHandler>();
+        
         return services;
     }
 }

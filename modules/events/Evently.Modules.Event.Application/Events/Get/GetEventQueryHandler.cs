@@ -13,5 +13,5 @@ public class GetEventQueryHandler(
                .AsNoTracking()
                .Include(e => e.TicketTypes)
                .FirstOrDefaultAsync(e => e.Id == request.EventId, cancellationToken)
-           ?? throw new KeyNotFoundException("Event with given id is not found.");
+           ?? throw new KeyNotFoundException("Event is not found.");
 }
