@@ -7,7 +7,6 @@ using Evently.Modules.Event.Application.Events.Queries.Get;
 using Evently.Modules.Event.Application.Events.Queries.GetList;
 using Evently.Modules.Event.Application.Events.Queries.Search;
 using Evently.Modules.Event.Domain.Events;
-using Evently.Modules.Event.Domain.TicketTypes;
 using Evently.Modules.Event.Presentation.Events.Requests.Cancel;
 using Evently.Modules.Event.Presentation.Events.Requests.Create;
 using Evently.Modules.Event.Presentation.Events.Requests.Get;
@@ -15,7 +14,6 @@ using Evently.Modules.Event.Presentation.Events.Requests.GetList;
 using Evently.Modules.Event.Presentation.Events.Requests.Publish_;
 using Evently.Modules.Event.Presentation.Events.Requests.Reschedule;
 using Evently.Modules.Event.Presentation.Events.Requests.Search;
-using Evently.Modules.Event.Presentation.TicketTypes;
 using Mapster;
 using SearchEventsResponse = Evently.Modules.Event.Presentation.Events.Requests.Search.SearchEventsResponse;
 
@@ -25,14 +23,6 @@ public class EventsMappingConfiguration : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<TicketType, TicketTypeResponse>()
-            .Map(dest => dest.Id, src => src.Id)
-            .Map(dest => dest.EventId, src => src.EventId)
-            .Map(dest => dest.Name, src => src.Name)
-            .Map(dest => dest.Price, src => src.Price)
-            .Map(dest => dest.Quantity, src => src.Quantity)
-            .Map(dest => dest.Currency, src => src.Currency);
-
         config.NewConfig<EventEntity, EventDto>()
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Title, src => src.Title)

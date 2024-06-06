@@ -1,3 +1,4 @@
+using Evently.Modules.Event.Application.TicketTypes;
 using Evently.Modules.Event.Application.TicketTypes.Commands.Create;
 using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
@@ -29,13 +30,11 @@ public class TicketTypesController(
     }
 
     [HttpGet("get")]
-    public async Task<ActionResult<TicketTypeResponse>> Get([FromQuery] GetTicketTypeRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<TicketTypeDto>> Get([FromQuery] GetTicketTypeRequest request, CancellationToken cancellationToken)
     {
         var query = mapper.Map<GetTicketTypeQuery>(request);
 
-        var ticketType = await mediator.Send(query, cancellationToken);
-
-        return Ok(mapper.Map<TicketTypeResponse>(ticketType));
+        return Ok(await mediator.Send(query, cancellationToken));
     }
 
     [HttpGet("get-list")]

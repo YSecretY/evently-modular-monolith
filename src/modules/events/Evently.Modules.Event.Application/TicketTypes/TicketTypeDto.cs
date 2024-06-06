@@ -1,6 +1,6 @@
-namespace Evently.Modules.Event.Presentation.TicketTypes;
+namespace Evently.Modules.Event.Application.TicketTypes;
 
-public sealed record TicketTypeResponse(
+public sealed record TicketTypeDto(
     Guid Id,
     Guid EventId,
     string Name,

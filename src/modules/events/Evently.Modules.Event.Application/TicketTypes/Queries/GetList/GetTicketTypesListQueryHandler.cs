@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using Evently.Modules.Event.Domain.Events;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 
 public class GetTicketTypesListQueryHandler(
-    IEventsDbContext dbContext
+    IEventsDbContext dbContext,
+    IMapper mapper
 ) : IRequestHandler<GetTicketTypesListQuery, GetTicketTypesListQueryResponse>
 {
     public async Task<GetTicketTypesListQueryResponse> Handle(GetTicketTypesListQuery request, CancellationToken cancellationToken)
@@ -21,12 +23,13 @@ public class GetTicketTypesListQueryHandler(
 
         var ticketTypes = await dbContext.TicketTypes
             .AsNoTracking()
+            .OrderBy(t => t.Price)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
 
         return new GetTicketTypesListQueryResponse(
-            TicketTypes: ticketTypes,
+            TicketTypes: mapper.Map<List<TicketTypeDto>>(ticketTypes),
             PageNumber: request.PageNumber,
             PageSize: request.PageSize,
             MaxPages: maxPages

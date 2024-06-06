@@ -1,3 +1,4 @@
+using Evently.Modules.Event.Application.TicketTypes;
 using Evently.Modules.Event.Application.TicketTypes.Commands.Create;
 using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
@@ -15,7 +16,7 @@ public class TicketTypesMappingConfiguration : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<TicketType, TicketTypeResponse>()
+        config.NewConfig<TicketType, TicketTypeDto>()
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.EventId, src => src.Event)
