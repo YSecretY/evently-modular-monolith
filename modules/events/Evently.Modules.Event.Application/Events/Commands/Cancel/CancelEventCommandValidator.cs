@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Evently.Modules.Event.Application.Events.Commands.Cancel;
 
-public class CancelEventCommandValidator : AbstractValidator<CancelEventCommand>
+internal sealed class CancelEventCommandValidator : AbstractValidator<CancelEventCommand>
 {
     public CancelEventCommandValidator()
     {
