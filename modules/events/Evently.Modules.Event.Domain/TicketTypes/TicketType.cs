@@ -38,7 +38,7 @@ public sealed class TicketType : Entity
     public int Quantity { get; private set; }
 
     public static TicketType Create(
-        EventEntity eventEntity,
+        Guid eventId,
         string name,
         decimal price,
         string currency,
@@ -53,7 +53,7 @@ public sealed class TicketType : Entity
 
         var ticketType = new TicketType
         (
-            eventId: eventEntity.Id,
+            eventId: eventId,
             name: name,
             price: price,
             currency: currency,

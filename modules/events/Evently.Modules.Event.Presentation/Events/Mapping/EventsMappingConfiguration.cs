@@ -1,10 +1,10 @@
-using Evently.Modules.Event.Application.Events.Cancel;
-using Evently.Modules.Event.Application.Events.Create;
-using Evently.Modules.Event.Application.Events.Get;
-using Evently.Modules.Event.Application.Events.GetList;
-using Evently.Modules.Event.Application.Events.Publish_;
-using Evently.Modules.Event.Application.Events.Reschedule;
-using Evently.Modules.Event.Application.Events.Search;
+using Evently.Modules.Event.Application.Events.Commands.Cancel;
+using Evently.Modules.Event.Application.Events.Commands.Create;
+using Evently.Modules.Event.Application.Events.Commands.Publish_;
+using Evently.Modules.Event.Application.Events.Commands.Reschedule;
+using Evently.Modules.Event.Application.Events.Queries.Get;
+using Evently.Modules.Event.Application.Events.Queries.GetList;
+using Evently.Modules.Event.Application.Events.Queries.Search;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Domain.TicketTypes;
 using Evently.Modules.Event.Presentation.Events.Requests.Cancel;
@@ -14,6 +14,7 @@ using Evently.Modules.Event.Presentation.Events.Requests.GetList;
 using Evently.Modules.Event.Presentation.Events.Requests.Publish_;
 using Evently.Modules.Event.Presentation.Events.Requests.Reschedule;
 using Evently.Modules.Event.Presentation.Events.Requests.Search;
+using Evently.Modules.Event.Presentation.TicketTypes;
 using Mapster;
 using SearchEventsResponse = Evently.Modules.Event.Presentation.Events.Requests.Search.SearchEventsResponse;
 

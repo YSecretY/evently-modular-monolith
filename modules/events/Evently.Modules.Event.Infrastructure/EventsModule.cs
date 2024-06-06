@@ -1,12 +1,13 @@
 using System.Reflection;
 using Evently.Modules.Event.Application.Abstraction;
-using Evently.Modules.Event.Application.Events.Cancel;
-using Evently.Modules.Event.Application.Events.Create;
-using Evently.Modules.Event.Application.Events.Get;
-using Evently.Modules.Event.Application.Events.GetList;
-using Evently.Modules.Event.Application.Events.Publish_;
-using Evently.Modules.Event.Application.Events.Reschedule;
-using Evently.Modules.Event.Application.Events.Search;
+using Evently.Modules.Event.Application.Events.Commands.Cancel;
+using Evently.Modules.Event.Application.Events.Commands.Create;
+using Evently.Modules.Event.Application.Events.Commands.Publish_;
+using Evently.Modules.Event.Application.Events.Commands.Reschedule;
+using Evently.Modules.Event.Application.Events.Queries.Get;
+using Evently.Modules.Event.Application.Events.Queries.GetList;
+using Evently.Modules.Event.Application.Events.Queries.Search;
+using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Infrastructure.Database;
 using Evently.Modules.Event.Infrastructure.Services.Time;
@@ -72,6 +73,8 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<PublishEventCommand>, PublishEventCommandHandler>();
         services.AddTransient<IRequestHandler<RescheduleEventCommand>, RescheduleEventCommandHandler>();
         services.AddTransient<IRequestHandler<SearchEventsQuery, SearchEventsQueryResponse>, SearchEventsQueryHandler>();
+
+        services.AddTransient<IRequestHandler<CreateTicketTypeCommand, Guid>, CreateTicketTypeCommandHandler>();
         
         return services;
     }

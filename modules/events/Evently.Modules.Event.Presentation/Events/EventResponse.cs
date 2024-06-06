@@ -1,3 +1,5 @@
+using Evently.Modules.Event.Presentation.TicketTypes;
+
 namespace Evently.Modules.Event.Presentation.Events;
 
 public sealed record EventResponse(
