@@ -1,5 +1,6 @@
 using System.Reflection;
 using Evently.Modules.Event.Application.Abstraction;
+using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
 using Evently.Modules.Event.Application.Events.Commands.Create;
 using Evently.Modules.Event.Application.Events.Commands.Publish_;
@@ -81,6 +82,8 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<GetTicketTypeQuery, TicketType>, GetTicketTypeQueryHandler>();
         services.AddTransient<IRequestHandler<GetTicketTypesListQuery, GetTicketTypesListQueryResponse>, GetTicketTypesListQueryHandler>();
         services.AddTransient<IRequestHandler<UpdateTicketTypePriceCommand>, UpdateTicketTypePriceCommandHandler>();
+
+        services.AddTransient<IRequestHandler<ArchiveCategoryCommand>, ArchiveCategoryCommandHandler>();
 
         return services;
     }
