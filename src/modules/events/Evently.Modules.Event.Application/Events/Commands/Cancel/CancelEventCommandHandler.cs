@@ -1,5 +1,5 @@
-using Evently.Modules.Event.Application.Abstraction;
 using Evently.Modules.Event.Domain.Events;
+using Evently.Shared.Application.Abstractions.Time;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

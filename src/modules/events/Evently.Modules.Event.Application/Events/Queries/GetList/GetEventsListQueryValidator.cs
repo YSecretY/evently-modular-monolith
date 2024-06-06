@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Evently.Modules.Event.Application.Events.Queries.GetList;
 
-public class GetEventsListQueryValidator : AbstractValidator<GetEventsListQuery>
+internal sealed class GetEventsListQueryValidator : AbstractValidator<GetEventsListQuery>
 {
     public GetEventsListQueryValidator()
     {
