@@ -4,12 +4,14 @@ using Evently.Modules.Event.Application.Events.Get;
 using Evently.Modules.Event.Application.Events.GetList;
 using Evently.Modules.Event.Application.Events.Publish_;
 using Evently.Modules.Event.Application.Events.Reschedule;
-using Evently.Modules.Event.Presentation.Events.Cancel;
-using Evently.Modules.Event.Presentation.Events.Create;
-using Evently.Modules.Event.Presentation.Events.Get;
-using Evently.Modules.Event.Presentation.Events.GetList;
-using Evently.Modules.Event.Presentation.Events.Publish_;
-using Evently.Modules.Event.Presentation.Events.Reschedule;
+using Evently.Modules.Event.Application.Events.Search;
+using Evently.Modules.Event.Presentation.Events.Requests.Cancel;
+using Evently.Modules.Event.Presentation.Events.Requests.Create;
+using Evently.Modules.Event.Presentation.Events.Requests.Get;
+using Evently.Modules.Event.Presentation.Events.Requests.GetList;
+using Evently.Modules.Event.Presentation.Events.Requests.Publish_;
+using Evently.Modules.Event.Presentation.Events.Requests.Reschedule;
+using Evently.Modules.Event.Presentation.Events.Requests.Search;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -80,5 +82,15 @@ public class EventsController(
         await mediator.Send(command, cancellationToken);
 
         return Ok();
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<SearchEventsResponse>> SearchEvents([FromQuery] SearchEventsRequest request, CancellationToken cancellationToken)
+    {
+        var query = mapper.Map<SearchEventsQuery>(request);
+
+        var response = await mediator.Send(query, cancellationToken);
+
+        return Ok(mapper.Map<SearchEventsResponse>(response));
     }
 }

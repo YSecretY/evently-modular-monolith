@@ -1,4 +1,4 @@
-namespace Evently.Modules.Event.Presentation.Events.GetList;
+namespace Evently.Modules.Event.Presentation.Events.Requests.GetList;
 
 public sealed record GetEventsListResponse(
     List<EventResponse> Events,

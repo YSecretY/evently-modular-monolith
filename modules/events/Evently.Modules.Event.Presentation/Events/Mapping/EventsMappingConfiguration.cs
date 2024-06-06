@@ -4,15 +4,18 @@ using Evently.Modules.Event.Application.Events.Get;
 using Evently.Modules.Event.Application.Events.GetList;
 using Evently.Modules.Event.Application.Events.Publish_;
 using Evently.Modules.Event.Application.Events.Reschedule;
+using Evently.Modules.Event.Application.Events.Search;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Domain.TicketTypes;
-using Evently.Modules.Event.Presentation.Events.Cancel;
-using Evently.Modules.Event.Presentation.Events.Create;
-using Evently.Modules.Event.Presentation.Events.Get;
-using Evently.Modules.Event.Presentation.Events.GetList;
-using Evently.Modules.Event.Presentation.Events.Publish_;
-using Evently.Modules.Event.Presentation.Events.Reschedule;
+using Evently.Modules.Event.Presentation.Events.Requests.Cancel;
+using Evently.Modules.Event.Presentation.Events.Requests.Create;
+using Evently.Modules.Event.Presentation.Events.Requests.Get;
+using Evently.Modules.Event.Presentation.Events.Requests.GetList;
+using Evently.Modules.Event.Presentation.Events.Requests.Publish_;
+using Evently.Modules.Event.Presentation.Events.Requests.Reschedule;
+using Evently.Modules.Event.Presentation.Events.Requests.Search;
 using Mapster;
+using SearchEventsResponse = Evently.Modules.Event.Presentation.Events.Requests.Search.SearchEventsResponse;
 
 namespace Evently.Modules.Event.Presentation.Events.Mapping;
 
@@ -70,5 +73,18 @@ public class EventsMappingConfiguration : IRegister
 
         config.NewConfig<CancelEventRequest, CancelEventCommand>()
             .Map(dest => dest.EventId, src => src.EventId);
+
+        config.NewConfig<SearchEventsRequest, SearchEventsQuery>()
+            .Map(dest => dest.CategoryId, src => src.CategoryId)
+            .Map(dest => dest.PageNumber, src => src.PageNumber)
+            .Map(dest => dest.PageSize, src => src.PageSize)
+            .Map(dest => dest.StartDate, src => src.StartDate)
+            .Map(dest => dest.EndDate, src => src.EndDate);
+
+        config.NewConfig<SearchEventsResponse, SearchEventsQueryResponse>()
+            .Map(dest => dest.Events, src => src.Events)
+            .Map(dest => dest.PageNumber, src => src.PageNumber)
+            .Map(dest => dest.PageSize, src => src.PageSize)
+            .Map(dest => dest.TotalCount, src => src.TotalCount);
     }
 }

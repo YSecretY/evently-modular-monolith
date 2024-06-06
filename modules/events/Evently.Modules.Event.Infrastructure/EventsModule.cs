@@ -6,6 +6,7 @@ using Evently.Modules.Event.Application.Events.Get;
 using Evently.Modules.Event.Application.Events.GetList;
 using Evently.Modules.Event.Application.Events.Publish_;
 using Evently.Modules.Event.Application.Events.Reschedule;
+using Evently.Modules.Event.Application.Events.Search;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Infrastructure.Database;
 using Evently.Modules.Event.Infrastructure.Services.Time;
@@ -70,6 +71,7 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<CancelEventCommand>, CancelEventCommandHandler>();
         services.AddTransient<IRequestHandler<PublishEventCommand>, PublishEventCommandHandler>();
         services.AddTransient<IRequestHandler<RescheduleEventCommand>, RescheduleEventCommandHandler>();
+        services.AddTransient<IRequestHandler<SearchEventsQuery, SearchEventsQueryResponse>, SearchEventsQueryHandler>();
         
         return services;
     }
