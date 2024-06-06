@@ -3,6 +3,7 @@ using Evently.Modules.Event.Application.Abstraction;
 using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Categories.Commands.Create;
 using Evently.Modules.Event.Application.Categories.Queries.Get;
+using Evently.Modules.Event.Application.Categories.Queries.GetList;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
 using Evently.Modules.Event.Application.Events.Commands.Create;
 using Evently.Modules.Event.Application.Events.Commands.Publish_;
@@ -89,6 +90,7 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<CreateCategoryCommand, Guid>, CreateCategoryCommandHandler>();
         services.AddTransient<IRequestHandler<GetCategoryQuery, Category>, GetCategoryQueryHandler>();
         services.AddTransient<IRequestHandler<ArchiveCategoryCommand>, ArchiveCategoryCommandHandler>();
+        services.AddTransient<IRequestHandler<GetCategoriesListQuery, GetCategoriesListQueryResponse>, GetCategoriesListQueryHandler>();
 
         return services;
     }

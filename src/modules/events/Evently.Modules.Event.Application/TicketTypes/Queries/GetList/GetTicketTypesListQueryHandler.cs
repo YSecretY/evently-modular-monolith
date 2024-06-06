@@ -14,7 +14,7 @@ public class GetTicketTypesListQueryHandler(
         var maxPages = (int)Math.Ceiling((double)await dbContext.TicketTypes.CountAsync(cancellationToken) / request.PageSize);
 
         if (maxPages is 0)
-            throw new ValidationException("No ticket types.");
+            throw new KeyNotFoundException("No ticket types.");
 
         if (request.PageNumber > maxPages)
             throw new ValidationException("Page number cannot be greater than max pages.");
