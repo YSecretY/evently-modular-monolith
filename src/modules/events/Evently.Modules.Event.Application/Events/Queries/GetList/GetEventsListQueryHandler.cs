@@ -22,7 +22,7 @@ public class GetEventsListQueryHandler(
             throw new ValidationException("Request page number cannot be greater than max pages.");
 
         var events = await dbContext.Events
-            .Include(e => e.TicketTypes)
+            .OrderBy(e => e.StartsAtUtc)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);

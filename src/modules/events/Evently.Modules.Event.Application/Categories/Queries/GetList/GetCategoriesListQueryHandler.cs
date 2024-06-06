@@ -23,6 +23,7 @@ public class GetCategoriesListQueryHandler(
 
         var categories = await dbContext.Categories
             .AsNoTracking()
+            .OrderBy(c => c.Name)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);

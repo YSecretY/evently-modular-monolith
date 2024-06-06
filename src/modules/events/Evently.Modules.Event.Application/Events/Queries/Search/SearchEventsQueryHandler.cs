@@ -23,6 +23,7 @@ public class SearchEventsQueryHandler(
         var totalCount = await eventsQuery.CountAsync(cancellationToken);
 
         var events = await eventsQuery
+            .OrderByDescending(e => e.StartsAtUtc)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);
