@@ -1,4 +1,4 @@
-namespace Evently.Modules.Event.Presentation.TicketTypes.Requests;
+namespace Evently.Modules.Event.Presentation.TicketTypes.Requests.Create;
 
 public record CreateTicketTypeRequest(
     Guid EventId,

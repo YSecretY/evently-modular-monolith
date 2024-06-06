@@ -9,6 +9,7 @@ using Evently.Modules.Event.Application.Events.Queries.GetList;
 using Evently.Modules.Event.Application.Events.Queries.Search;
 using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
+using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Domain.TicketTypes;
 using Evently.Modules.Event.Infrastructure.Database;
@@ -16,7 +17,6 @@ using Evently.Modules.Event.Infrastructure.Services.Time;
 using Evently.Modules.Event.Presentation.Events.Controllers;
 using FluentValidation;
 using Mapster;
-using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -78,6 +78,7 @@ public static class EventsModule
 
         services.AddTransient<IRequestHandler<CreateTicketTypeCommand, Guid>, CreateTicketTypeCommandHandler>();
         services.AddTransient<IRequestHandler<GetTicketTypeQuery, TicketType>, GetTicketTypeQueryHandler>();
+        services.AddTransient<IRequestHandler<GetTicketTypesListQuery, GetTicketTypesListQueryResponse>, GetTicketTypesListQueryHandler>();
 
         return services;
     }

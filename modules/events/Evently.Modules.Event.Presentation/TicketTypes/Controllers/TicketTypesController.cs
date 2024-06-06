@@ -1,6 +1,10 @@
 using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
+using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests;
+using Evently.Modules.Event.Presentation.TicketTypes.Requests.Create;
+using Evently.Modules.Event.Presentation.TicketTypes.Requests.Get;
+using Evently.Modules.Event.Presentation.TicketTypes.Requests.GetList;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +35,15 @@ public class TicketTypesController(
         var ticketType = await mediator.Send(query, cancellationToken);
 
         return Ok(mapper.Map<TicketTypeResponse>(ticketType));
+    }
+
+    [HttpGet("get-list")]
+    public async Task<ActionResult<GetTicketTypesListResponse>> GetList([FromQuery] GetTicketTypesListRequest request, CancellationToken cancellationToken)
+    {
+        var query = mapper.Map<GetTicketTypesListQuery>(request);
+
+        var response = await mediator.Send(query, cancellationToken);
+
+        return Ok(mapper.Map<GetTicketTypesListResponse>(response));
     }
 }

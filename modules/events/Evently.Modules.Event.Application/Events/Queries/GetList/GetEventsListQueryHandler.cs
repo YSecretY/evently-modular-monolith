@@ -13,10 +13,13 @@ public class GetEventsListQueryHandler(
     {
         var maxPages = (int)Math.Ceiling((double)await dbContext.Events.CountAsync(cancellationToken) / request.PageSize);
 
+        if (maxPages is 0)
+            throw new ValidationException("No events.");
+
         if (request.PageNumber > maxPages)
             throw new ValidationException("Request page number cannot be greater than max pages.");
 
-        List<EventEntity> events = await dbContext.Events
+        var events = await dbContext.Events
             .Include(e => e.TicketTypes)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
