@@ -3,7 +3,7 @@ using Evently.Modules.Event.Domain.TicketTypes;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
+namespace Evently.Modules.Event.Application.TicketTypes.Commands.Create;
 
 public class CreateTicketTypeCommandHandler(
     IEventsDbContext dbContext

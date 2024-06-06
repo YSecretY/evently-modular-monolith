@@ -1,10 +1,12 @@
-using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
+using Evently.Modules.Event.Application.TicketTypes.Commands.Create;
+using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
 using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.Create;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.Get;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.GetList;
+using Evently.Modules.Event.Presentation.TicketTypes.Requests.UpdatePrice;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +47,15 @@ public class TicketTypesController(
         var response = await mediator.Send(query, cancellationToken);
 
         return Ok(mapper.Map<GetTicketTypesListResponse>(response));
+    }
+
+    [HttpPut("update-price")]
+    public async Task<IActionResult> UpdatePrice([FromBody] UpdateTicketTypePriceRequest request, CancellationToken cancellationToken)
+    {
+        var command = mapper.Map<UpdateTicketTypePriceCommand>(request);
+
+        await mediator.Send(command, cancellationToken);
+
+        return Ok();
     }
 }

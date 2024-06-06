@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
+namespace Evently.Modules.Event.Application.TicketTypes.Commands.Create;
 
 public sealed record CreateTicketTypeCommand(
     Guid EventId,

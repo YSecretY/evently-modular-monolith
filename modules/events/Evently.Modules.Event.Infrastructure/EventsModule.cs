@@ -7,7 +7,8 @@ using Evently.Modules.Event.Application.Events.Commands.Reschedule;
 using Evently.Modules.Event.Application.Events.Queries.Get;
 using Evently.Modules.Event.Application.Events.Queries.GetList;
 using Evently.Modules.Event.Application.Events.Queries.Search;
-using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
+using Evently.Modules.Event.Application.TicketTypes.Commands.Create;
+using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
 using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 using Evently.Modules.Event.Domain.Events;
@@ -79,6 +80,7 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<CreateTicketTypeCommand, Guid>, CreateTicketTypeCommandHandler>();
         services.AddTransient<IRequestHandler<GetTicketTypeQuery, TicketType>, GetTicketTypeQueryHandler>();
         services.AddTransient<IRequestHandler<GetTicketTypesListQuery, GetTicketTypesListQueryResponse>, GetTicketTypesListQueryHandler>();
+        services.AddTransient<IRequestHandler<UpdateTicketTypePriceCommand>, UpdateTicketTypePriceCommandHandler>();
 
         return services;
     }
