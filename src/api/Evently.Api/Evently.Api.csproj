@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\modules\events\Evently.Modules.Event.Infrastructure\Evently.Modules.Event.Infrastructure.csproj"/>
+      <ProjectReference Include="..\..\modules\events\Evently.Modules.Event.Infrastructure\Evently.Modules.Event.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
