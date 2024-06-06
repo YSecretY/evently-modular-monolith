@@ -1,4 +1,5 @@
 using Evently.Modules.Event.Application.TicketTypes.Commands.CreateTicketType;
+using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests;
 using MapsterMapper;
 using MediatR;
@@ -20,5 +21,15 @@ public class TicketTypesController(
         var ticketTypeId = await mediator.Send(command, cancellationToken);
 
         return Ok(ticketTypeId);
+    }
+
+    [HttpGet("get")]
+    public async Task<ActionResult<TicketTypeResponse>> Get([FromQuery] GetTicketTypeRequest request, CancellationToken cancellationToken)
+    {
+        var query = mapper.Map<GetTicketTypeQuery>(request);
+
+        var ticketType = await mediator.Send(query, cancellationToken);
+
+        return Ok(mapper.Map<TicketTypeResponse>(ticketType));
     }
 }
