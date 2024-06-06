@@ -1,9 +1,7 @@
-﻿using Evently.Modules.Event.Domain.Events;
-
-namespace Evently.Modules.Event.Application.Events.Queries.Search;
+﻿namespace Evently.Modules.Event.Application.Events.Queries.Search;
 
 public sealed record SearchEventsQueryResponse(
-    List<EventEntity> Events,
+    List<EventDto> Events,
     int PageNumber,
     int PageSize,
     int TotalCount

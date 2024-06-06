@@ -1,3 +1,4 @@
+using Evently.Modules.Event.Application.Events;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
 using Evently.Modules.Event.Application.Events.Commands.Create;
 using Evently.Modules.Event.Application.Events.Commands.Publish_;
@@ -35,13 +36,11 @@ public class EventsController(
     }
 
     [HttpGet("get")]
-    public async Task<ActionResult<EventResponse>> GetEvent([FromQuery] GetEventRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<EventDto>> GetEvent([FromQuery] GetEventRequest request, CancellationToken cancellationToken)
     {
         var query = mapper.Map<GetEventQuery>(request);
 
-        var eventEntity = await mediator.Send(query, cancellationToken);
-
-        return Ok(mapper.Map<EventResponse>(eventEntity));
+        return Ok(await mediator.Send(query, cancellationToken));
     }
 
     [HttpGet("get-list")]

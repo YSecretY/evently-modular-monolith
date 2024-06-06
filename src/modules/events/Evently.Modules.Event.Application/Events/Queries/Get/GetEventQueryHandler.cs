@@ -1,17 +1,22 @@
 using Evently.Modules.Event.Domain.Events;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Evently.Modules.Event.Application.Events.Queries.Get;
 
 public class GetEventQueryHandler(
-    IEventsDbContext dbContext
-) : IRequestHandler<GetEventQuery, EventEntity>
+    IEventsDbContext dbContext,
+    IMapper mapper
+) : IRequestHandler<GetEventQuery, EventDto>
 {
-    public async Task<EventEntity> Handle(GetEventQuery request, CancellationToken cancellationToken)
-        => await dbContext.Events
-               .AsNoTracking()
-               .Include(e => e.TicketTypes)
-               .FirstOrDefaultAsync(e => e.Id == request.EventId, cancellationToken)
-           ?? throw new KeyNotFoundException("Event is not found.");
+    public async Task<EventDto> Handle(GetEventQuery request, CancellationToken cancellationToken)
+    {
+        var eventEntity = await dbContext.Events
+                              .AsNoTracking()
+                              .FirstOrDefaultAsync(e => e.Id == request.EventId, cancellationToken)
+                          ?? throw new KeyNotFoundException("Event is not found.");
+
+        return mapper.Map<EventDto>(eventEntity);
+    }
 }

@@ -1,11 +1,13 @@
 using Evently.Modules.Event.Domain.Events;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Evently.Modules.Event.Application.Events.Queries.Search;
 
 public class SearchEventsQueryHandler(
-    IEventsDbContext dbContext
+    IEventsDbContext dbContext,
+    IMapper mapper
 ) : IRequestHandler<SearchEventsQuery, SearchEventsQueryResponse>
 {
     public async Task<SearchEventsQueryResponse> Handle(SearchEventsQuery request, CancellationToken cancellationToken)
@@ -27,7 +29,7 @@ public class SearchEventsQueryHandler(
 
         return new SearchEventsQueryResponse
         (
-            Events: events,
+            Events: mapper.Map<List<EventDto>>(events),
             PageNumber: request.PageNumber,
             PageSize: request.PageSize,
             TotalCount: totalCount

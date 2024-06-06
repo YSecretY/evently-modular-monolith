@@ -1,3 +1,4 @@
+using Evently.Modules.Event.Application.Events;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
 using Evently.Modules.Event.Application.Events.Commands.Create;
 using Evently.Modules.Event.Application.Events.Commands.Publish_;
@@ -32,7 +33,7 @@ public class EventsMappingConfiguration : IRegister
             .Map(dest => dest.Quantity, src => src.Quantity)
             .Map(dest => dest.Currency, src => src.Currency);
 
-        config.NewConfig<EventEntity, EventResponse>()
+        config.NewConfig<EventEntity, EventDto>()
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Title, src => src.Title)
             .Map(dest => dest.Description, src => src.Description)
@@ -40,8 +41,7 @@ public class EventsMappingConfiguration : IRegister
             .Map(dest => dest.CategoryId, src => src.CategoryId)
             .Map(dest => dest.StartsAtUtc, src => src.StartsAtUtc)
             .Map(dest => dest.EndsAtUtc, src => src.EndsAtUtc)
-            .Map(dest => dest.Status, src => src.Status.ToString())
-            .Map(dest => dest.TicketTypes, src => src.TicketTypes);
+            .Map(dest => dest.Status, src => src.Status.ToString());
 
         config.NewConfig<CreateEventRequest, CreateEventCommand>()
             .Map(dest => dest.Title, src => src.Title)

@@ -5,6 +5,7 @@ using Evently.Modules.Event.Application.Categories.Commands.Create;
 using Evently.Modules.Event.Application.Categories.Commands.Update;
 using Evently.Modules.Event.Application.Categories.Queries.Get;
 using Evently.Modules.Event.Application.Categories.Queries.GetList;
+using Evently.Modules.Event.Application.Events;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
 using Evently.Modules.Event.Application.Events.Commands.Create;
 using Evently.Modules.Event.Application.Events.Commands.Publish_;
@@ -76,7 +77,7 @@ public static class EventsModule
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
         services.AddTransient<IRequestHandler<CreateEventCommand, Guid>, CreateEventCommandHandler>();
-        services.AddTransient<IRequestHandler<GetEventQuery, EventEntity>, GetEventQueryHandler>();
+        services.AddTransient<IRequestHandler<GetEventQuery, EventDto>, GetEventQueryHandler>();
         services.AddTransient<IRequestHandler<GetEventsListQuery, GetEventsListQueryResponse>, GetEventsListQueryHandler>();
         services.AddTransient<IRequestHandler<CancelEventCommand>, CancelEventCommandHandler>();
         services.AddTransient<IRequestHandler<PublishEventCommand>, PublishEventCommandHandler>();
