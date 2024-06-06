@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using Evently.Modules.Event.Domain.Events;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Evently.Modules.Event.Application.Categories.Queries.GetList;
 
 public class GetCategoriesListQueryHandler(
-    IEventsDbContext dbContext
+    IEventsDbContext dbContext,
+    IMapper mapper
 ) : IRequestHandler<GetCategoriesListQuery, GetCategoriesListQueryResponse>
 {
     public async Task<GetCategoriesListQueryResponse> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
@@ -26,7 +28,7 @@ public class GetCategoriesListQueryHandler(
             .ToListAsync(cancellationToken);
 
         return new GetCategoriesListQueryResponse(
-            Categories: categories,
+            Categories: mapper.Map<List<CategoryDto>>(categories),
             PageNumber: request.PageNumber,
             PageSize: request.PageSize,
             MaxPages: maxPages

@@ -1,3 +1,4 @@
+using Evently.Modules.Event.Application.Categories;
 using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Categories.Commands.Create;
 using Evently.Modules.Event.Application.Categories.Commands.Update;
@@ -31,13 +32,11 @@ public class CategoriesController(
     }
 
     [HttpGet("get")]
-    public async Task<ActionResult<CategoryResponse>> Get([FromQuery] GetCategoryRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<CategoryDto>> Get([FromQuery] GetCategoryRequest request, CancellationToken cancellationToken)
     {
         var query = mapper.Map<GetCategoryQuery>(request);
 
-        var category = await mediator.Send(query, cancellationToken);
-
-        return Ok(mapper.Map<CategoryResponse>(category));
+        return Ok(await mediator.Send(query, cancellationToken));
     }
 
     [HttpGet("get-list")]

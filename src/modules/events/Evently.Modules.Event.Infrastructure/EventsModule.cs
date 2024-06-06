@@ -1,5 +1,6 @@
 using System.Reflection;
 using Evently.Modules.Event.Application.Abstraction;
+using Evently.Modules.Event.Application.Categories;
 using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Categories.Commands.Create;
 using Evently.Modules.Event.Application.Categories.Commands.Update;
@@ -17,7 +18,6 @@ using Evently.Modules.Event.Application.TicketTypes.Commands.Create;
 using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
 using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
-using Evently.Modules.Event.Domain.Categories;
 using Evently.Modules.Event.Domain.Events;
 using Evently.Modules.Event.Domain.TicketTypes;
 using Evently.Modules.Event.Infrastructure.Database;
@@ -90,7 +90,7 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<UpdateTicketTypePriceCommand>, UpdateTicketTypePriceCommandHandler>();
 
         services.AddTransient<IRequestHandler<CreateCategoryCommand, Guid>, CreateCategoryCommandHandler>();
-        services.AddTransient<IRequestHandler<GetCategoryQuery, Category>, GetCategoryQueryHandler>();
+        services.AddTransient<IRequestHandler<GetCategoryQuery, CategoryDto>, GetCategoryQueryHandler>();
         services.AddTransient<IRequestHandler<ArchiveCategoryCommand>, ArchiveCategoryCommandHandler>();
         services.AddTransient<IRequestHandler<GetCategoriesListQuery, GetCategoriesListQueryResponse>, GetCategoriesListQueryHandler>();
         services.AddTransient<IRequestHandler<UpdateCategoryCommand>, UpdateCategoryCommandHandler>();
