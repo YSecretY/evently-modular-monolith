@@ -3,7 +3,6 @@ using Evently.Modules.Event.Application.TicketTypes.Commands.UpdatePrice;
 using Evently.Modules.Event.Application.TicketTypes.Queries.Get;
 using Evently.Modules.Event.Application.TicketTypes.Queries.GetList;
 using Evently.Modules.Event.Domain.TicketTypes;
-using Evently.Modules.Event.Presentation.TicketTypes.Requests;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.Create;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.Get;
 using Evently.Modules.Event.Presentation.TicketTypes.Requests.GetList;
