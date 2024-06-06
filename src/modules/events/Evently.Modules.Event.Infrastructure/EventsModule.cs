@@ -2,6 +2,7 @@ using System.Reflection;
 using Evently.Modules.Event.Application.Abstraction;
 using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Categories.Commands.Create;
+using Evently.Modules.Event.Application.Categories.Commands.Update;
 using Evently.Modules.Event.Application.Categories.Queries.Get;
 using Evently.Modules.Event.Application.Categories.Queries.GetList;
 using Evently.Modules.Event.Application.Events.Commands.Cancel;
@@ -91,6 +92,7 @@ public static class EventsModule
         services.AddTransient<IRequestHandler<GetCategoryQuery, Category>, GetCategoryQueryHandler>();
         services.AddTransient<IRequestHandler<ArchiveCategoryCommand>, ArchiveCategoryCommandHandler>();
         services.AddTransient<IRequestHandler<GetCategoriesListQuery, GetCategoriesListQueryResponse>, GetCategoriesListQueryHandler>();
+        services.AddTransient<IRequestHandler<UpdateCategoryCommand>, UpdateCategoryCommandHandler>();
 
         return services;
     }

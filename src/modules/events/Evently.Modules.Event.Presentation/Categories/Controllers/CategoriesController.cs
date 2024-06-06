@@ -1,11 +1,13 @@
 using Evently.Modules.Event.Application.Categories.Commands.Archive;
 using Evently.Modules.Event.Application.Categories.Commands.Create;
+using Evently.Modules.Event.Application.Categories.Commands.Update;
 using Evently.Modules.Event.Application.Categories.Queries.Get;
 using Evently.Modules.Event.Application.Categories.Queries.GetList;
 using Evently.Modules.Event.Presentation.Categories.Requests.Archive;
 using Evently.Modules.Event.Presentation.Categories.Requests.Create;
 using Evently.Modules.Event.Presentation.Categories.Requests.Get;
 using Evently.Modules.Event.Presentation.Categories.Requests.GetList;
+using Evently.Modules.Event.Presentation.Categories.Requests.Update;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +48,16 @@ public class CategoriesController(
         var response = await mediator.Send(query, cancellationToken);
 
         return Ok(mapper.Map<GetCategoriesListResponse>(response));
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromQuery] UpdateCategoryRequest request, CancellationToken cancellationToken)
+    {
+        var command = mapper.Map<UpdateCategoryCommand>(request);
+
+        await mediator.Send(command, cancellationToken);
+
+        return Ok();
     }
 
     [HttpPut("archive")]
