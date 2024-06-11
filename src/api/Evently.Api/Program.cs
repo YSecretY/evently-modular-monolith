@@ -16,6 +16,8 @@ builder.Services.AddSharedInfrastructure(
     builder.Configuration.GetConnectionString("DbConnection") ?? throw new NullReferenceException("Connection string is not found.")
 );
 
+builder.Configuration.AddModulesConfigurations(["Events"]);
+
 builder.Services.AddEventsModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
