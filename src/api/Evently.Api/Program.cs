@@ -17,7 +17,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddSharedApplication([AssemblyReference.Assembly]);
 
 builder.Services.AddSharedInfrastructure(
-    builder.Configuration.GetConnectionString("DbConnection") ?? throw new NullReferenceException("Connection string is not found.")
+    builder.Configuration.GetConnectionString("Database") ?? throw new NullReferenceException("Database connection string is not found."),
+    builder.Configuration.GetConnectionString("Cache") ?? throw new NullReferenceException("Cache connection string is not found.")
 );
 
 builder.Configuration.AddModulesConfigurations(["Events"]);

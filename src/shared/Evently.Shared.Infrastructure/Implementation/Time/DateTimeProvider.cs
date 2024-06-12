@@ -1,6 +1,6 @@
 using Evently.Shared.Application.Abstractions.Time;
 
-namespace Evently.Shared.Infrastructure.AbstractionsImplementation.Time;
+namespace Evently.Shared.Infrastructure.Implementation.Time;
 
 public class DateTimeProvider : IDateTimeProvider
 {
