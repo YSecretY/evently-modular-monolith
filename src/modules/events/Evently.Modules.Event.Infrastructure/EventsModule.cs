@@ -32,7 +32,7 @@ public static class EventsModule
 
     private static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var dbConnectionString = configuration.GetConnectionString("DbConnection") ?? throw new NullReferenceException("Connection string is not found.");
+        var dbConnectionString = configuration.GetConnectionString("Database") ?? throw new NullReferenceException("Database connection string is not found.");
 
         services.AddDbContext<IEventsDbContext, EventsDbContext>(options =>
             options.UseNpgsql(dbConnectionString, npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(Schemas.Events)));

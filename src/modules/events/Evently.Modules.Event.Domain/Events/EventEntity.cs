@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Evently.Modules.Event.Domain.Abstractions;
 using Evently.Modules.Event.Domain.Events.DomainEvents;
 using Evently.Modules.Event.Domain.TicketTypes;
+using Evently.Shared.Domain.Abstractions;
 
 namespace Evently.Modules.Event.Domain.Events;
 

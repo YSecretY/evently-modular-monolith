@@ -1,4 +1,4 @@
-﻿using Evently.Modules.Event.Domain.Abstractions;
+﻿using Evently.Shared.Domain.Abstractions;
 
 namespace Evently.Modules.Event.Domain.Categories;
 

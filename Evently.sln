@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Shared.Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Shared.Infrastructure", "src\shared\Evently.Shared.Infrastructure\Evently.Shared.Infrastructure.csproj", "{34A92E54-DD59-4454-9EEF-B992EE7E6E56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Shared.Domain", "src\shared\Evently.Shared.Domain\Evently.Shared.Domain.csproj", "{B3321EDD-8E64-45F0-B652-8C98E2EC9B41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{34A92E54-DD59-4454-9EEF-B992EE7E6E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34A92E54-DD59-4454-9EEF-B992EE7E6E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34A92E54-DD59-4454-9EEF-B992EE7E6E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3321EDD-8E64-45F0-B652-8C98E2EC9B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3321EDD-8E64-45F0-B652-8C98E2EC9B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3321EDD-8E64-45F0-B652-8C98E2EC9B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3321EDD-8E64-45F0-B652-8C98E2EC9B41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E47EB2C8-0D65-43AE-A281-26BDC24FBB42} = {1528C428-2ADD-47FE-84B8-01991D4AEA8C}
@@ -76,5 +82,6 @@ Global
 		{53C2FC92-B23C-4FCF-B53E-3C14C752C0BE} = {1528C428-2ADD-47FE-84B8-01991D4AEA8C}
 		{5FFFBDE1-73E1-4A63-B020-576F3AB4591A} = {53C2FC92-B23C-4FCF-B53E-3C14C752C0BE}
 		{34A92E54-DD59-4454-9EEF-B992EE7E6E56} = {53C2FC92-B23C-4FCF-B53E-3C14C752C0BE}
+		{B3321EDD-8E64-45F0-B652-8C98E2EC9B41} = {53C2FC92-B23C-4FCF-B53E-3C14C752C0BE}
 	EndGlobalSection
 EndGlobal
