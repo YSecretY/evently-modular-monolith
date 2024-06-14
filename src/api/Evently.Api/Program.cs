@@ -1,7 +1,7 @@
 using Evently;
 using Evently.Extensions;
-using Evently.Modules.Event.Application;
-using Evently.Modules.Event.Infrastructure;
+using Evently.Modules.Events.Infrastructure;
+using Evently.Modules.Users.Infrastructure;
 using Evently.Shared.Application;
 using Evently.Shared.Infrastructure;
 using HealthChecks.UI.Client;
@@ -22,13 +22,17 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.AddSharedApplication([AssemblyReference.Assembly]);
+builder.Services.AddSharedApplication([
+    Evently.Modules.Events.Application.AssemblyReference.Assembly,
+    Evently.Modules.Users.Application.AssemblyReference.Assembly
+]);
 
 builder.Services.AddSharedInfrastructure(databaseConnectionString, redisConnectionString);
 
-builder.Configuration.AddModulesConfigurations(["Events"]);
+builder.Configuration.AddModulesConfigurations(["Events", "Users"]);
 
 builder.Services.AddEventsModule(builder.Configuration);
+builder.Services.AddUsersModule(builder.Configuration);
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(databaseConnectionString)
