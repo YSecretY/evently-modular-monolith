@@ -9,7 +9,7 @@ services:
       dockerfile: src/API/Evently.Api/Dockerfile
     ports:
       - "8080:8080"
-      - "8082:8082"
+      - "5001:5001"
   
   evently.database:
     image: postgres:latest
@@ -37,4 +37,4 @@ services:
     container_name: Evently.Redis
     restart: always
     ports:
-      - "6739:6739"
+      - "6379:6379"
