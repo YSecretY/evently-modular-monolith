@@ -4,9 +4,17 @@ using Evently.Modules.Event.Application;
 using Evently.Modules.Event.Infrastructure;
 using Evently.Shared.Application;
 using Evently.Shared.Infrastructure;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var databaseConnectionString = builder.Configuration.GetConnectionString("Database")
+                               ?? throw new NullReferenceException("Database connection string is not found.");
+
+var redisConnectionString = builder.Configuration.GetConnectionString("Cache")
+                            ?? throw new NullReferenceException("Cache connection string is not found.");
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
     loggerConfiguration.ReadFrom.Configuration(context.Configuration));
@@ -16,14 +24,15 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddSharedApplication([AssemblyReference.Assembly]);
 
-builder.Services.AddSharedInfrastructure(
-    builder.Configuration.GetConnectionString("Database") ?? throw new NullReferenceException("Database connection string is not found."),
-    builder.Configuration.GetConnectionString("Cache") ?? throw new NullReferenceException("Cache connection string is not found.")
-);
+builder.Services.AddSharedInfrastructure(databaseConnectionString, redisConnectionString);
 
 builder.Configuration.AddModulesConfigurations(["Events"]);
 
 builder.Services.AddEventsModule(builder.Configuration);
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(databaseConnectionString)
+    .AddRedis(redisConnectionString);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -43,6 +52,11 @@ app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapHealthChecks("health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.MapControllers();
 
